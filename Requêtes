@@ -1,0 +1,19 @@
+SELECT t.name, COUNT(p.wizard_id) AS number_player
+FROM team t
+JOIN player p ON t.id = p.team_id
+GROUP BY t.id
+ORDER BY number_player DESC;
+
+SELECT t.name
+FROM team t
+JOIN player p ON t.id = p.team_id
+GROUP BY t.name
+HAVING COUNT(p.wizard_id) >= 14
+ORDER BY t.name;
+
+SELECT CONCAT(w.lastname, ' ', w.firstname) AS player_name, p.enrollment_date
+FROM wizard w
+JOIN player p ON w.id = p.wizard_id
+JOIN team t ON t.id = p.team_id 
+HAVING DAYOFWEEK(p.enrollment_date) = 2
+ORDER BY p.enrollment_date
